@@ -34,7 +34,7 @@ const InvoiceDetails = () => {
             setNewStatus(data.invoice.status)
           }
       } catch (error) {
-        return (<>Invoice not found!</>)
+        return (<>No Invoice found!</>)
       }
     }
     fetchInvoice();
