@@ -1,9 +1,11 @@
 'use client'
-import React from 'react';
+import React,{useState} from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-
+import { MoonLoader } from 'react-spinners';
 const ProfileSection  = ({ user }: { user:any }) => {
+  const [sectionLoading, setSectionLoading] = useState(false);
   const sendResetPasswordToken = async()=>{
+    setSectionLoading(true);
     try {
       const response = await fetch('/api/sendResetPasswordToken',{
         method:'POST',
@@ -16,6 +18,8 @@ const ProfileSection  = ({ user }: { user:any }) => {
     } catch (error) {
       console.log(error);
       console.log('Something went wrong');  
+    } finally {
+      setSectionLoading(false);
     }
   }
   
@@ -24,7 +28,7 @@ const ProfileSection  = ({ user }: { user:any }) => {
     <>
     <Toaster/>
      {
-        user && 
+        sectionLoading ? <MoonLoader color="#16e7c0" /> : user && 
         <div className="flex m-4 items-center justify-center">
           <div className="bg-white p-8 rounded-lg shadow-md w-96 text-center">
             <h2 className="text-2xl font-bold text-green-600">{user.username}</h2>

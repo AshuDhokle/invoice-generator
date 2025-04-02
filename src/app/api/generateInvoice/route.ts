@@ -7,8 +7,7 @@ connect();
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
-       console.log(body);
-       
+      
         const newInvoice = new Invoice(body.InvoiceDetails)
 
         const savedInvoice = await newInvoice.save();
@@ -21,6 +20,8 @@ export async function POST(req: NextRequest) {
         
         return NextResponse.json({message:'Ok'}, {status:200})
     } catch (error) {
+        console.log(error);
+        
         return NextResponse.json({message:'Internal Server Error'},{status:500})
     }
 }

@@ -1,4 +1,5 @@
 'use client'
+import Footer from '@/Components/Footer/Footer'
 import Navbar from '@/Components/Navbar/Navbar'
 import PreviousInvoices from '@/Components/Profile/PreviousInvoices'
 import ProfileSection from '@/Components/Profile/ProfileSection'
@@ -34,6 +35,7 @@ const Profile = () => {
         <ProfileSection user = {user}/>
         <PreviousInvoices/>
         </div>
+        <Footer/>
     </div>
   )
 }
