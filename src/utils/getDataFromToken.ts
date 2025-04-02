@@ -11,6 +11,7 @@ export const getDataFromToken = async(req : NextRequest) =>{
       return decodedToken.id;
       
     } catch (error : unknown) {
+      console.log(error);
       throw new Error('Data not available');    
     }
 }
