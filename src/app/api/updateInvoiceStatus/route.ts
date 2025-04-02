@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ message: "Invoice not found" }, { status: 404 });
       }
   
-      let updatedFields: any = { status };
+      const updatedFields: { status: string; paidDate?: Date; totalAmount?: number; dueDate?: Date } = { status };
   
       if (status === "paid") {
         updatedFields.paidDate = new Date();

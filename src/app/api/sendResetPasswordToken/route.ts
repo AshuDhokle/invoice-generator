@@ -9,7 +9,10 @@ export async function POST(req:NextRequest) {
         
         const token  = req.cookies.get('token')?.value || '';
 
-        const decodedToken :any = jwt.verify(token, process.env.JWT_SECRET!);
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET!);
+        if (typeof decodedToken === 'string' || !('id' in decodedToken)) {
+            throw new Error('Invalid token');
+        }
         
         let userId = decodedToken.id;
         
@@ -18,16 +21,16 @@ export async function POST(req:NextRequest) {
             userId = user?._id;    
         }
         
-        const response = await sendMail({email:email,emailType:"RESETPASSWORD",userId:userId});
+        await sendMail({email:email,emailType:"RESETPASSWORD",userId:userId});
         
         return NextResponse.json({
             messsage:'Reset Password Link Sent To Your Email',
             success:true
         },{status:202})
 
-    } catch (error:any) {
+    } catch (error:unknown) {
         return NextResponse.json({
-            error:error.message
+            error
         },{status:500})
     }
 }

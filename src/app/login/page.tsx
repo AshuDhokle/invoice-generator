@@ -33,9 +33,9 @@ const Login = () => {
       if(response.ok){
         router.push('/');
       }
-    } catch (error : any) {
+    } catch (error : unknown) {
       console.log(error);
-      setMessage(error.message)
+      setMessage('Login Failed')
     } finally {
       setLoading(false);
     }

@@ -9,7 +9,7 @@ export interface IInvoiceItem {
 export interface IInvoice extends Document {
     invoiceNumber: string;
     date: Date;
-    dueDate: Date;
+    dueDate: string;
     paidDate?: Date;
     client: {
       name: string;

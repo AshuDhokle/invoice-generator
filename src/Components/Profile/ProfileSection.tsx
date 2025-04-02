@@ -1,8 +1,9 @@
 'use client'
+import { IUser } from '@/models/userModel';
 import React,{useState} from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { MoonLoader } from 'react-spinners';
-const ProfileSection  = ({ user }: { user:any }) => {
+const ProfileSection  = ({ user }: { user: IUser | null |undefined }) => {
   const [sectionLoading, setSectionLoading] = useState(false);
   const sendResetPasswordToken = async()=>{
     setSectionLoading(true);
@@ -10,7 +11,7 @@ const ProfileSection  = ({ user }: { user:any }) => {
       const response = await fetch('/api/sendResetPasswordToken',{
         method:'POST',
         headers:{'content':'Application/json'},
-        body: JSON.stringify({email: user.email})
+        body: JSON.stringify({email: user?.email})
       })   
       if(response.ok){
         toast.success('Token send to you email')

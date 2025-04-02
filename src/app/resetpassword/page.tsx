@@ -10,6 +10,7 @@ const ResetPassword = () => {
   const [resetDone, setResetDone] = useState(false);
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     try {
         if(token){
         if(password != confirmPassword){
@@ -31,6 +32,9 @@ const ResetPassword = () => {
 
     } catch (error) {
         console.log(error);
+        setMessage('Reset Password Failed')
+    } finally {
+      setLoading(false);
     }
   };
 

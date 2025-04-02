@@ -37,6 +37,7 @@ const InvoiceDetails = () => {
           setNewStatus(data.invoice.status)
         }
       } catch (error) {
+        console.log(error);
         return (<>No Invoice found!</>)
       } finally {
         setPageLoading(false);

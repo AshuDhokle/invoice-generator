@@ -16,7 +16,6 @@ const GenerateInvoice = () => {
   const [taxRate, setTaxRate] = useState(0);
   const [taxAmount, setTaxAmount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
-  const [status, setStatus] = useState("pending");
   const [notes, setNotes] = useState("");
   const [currency, setCurrency] = useState(0);
 
@@ -24,7 +23,7 @@ const GenerateInvoice = () => {
 
   useEffect(() => {
     let sum = 0;
-    for (let item of items) {
+    for (const item of items) {
       sum += item.total;
     }
     setSubtotal(sum);
@@ -36,7 +35,7 @@ const GenerateInvoice = () => {
   }, [subtotal])
 
 
-  const handleItemChange = (index: number, field: string, value: any) => {
+  const handleItemChange = (index: number, field: string, value: string) => {
     const updatedItems = [...items];
     updatedItems[index] = { ...updatedItems[index], [field]: value };
     updatedItems[index].total = updatedItems[index].quantity * updatedItems[index].unitPrice;
@@ -67,7 +66,7 @@ const GenerateInvoice = () => {
         taxRate,
         taxAmount,
         totalAmount,
-        status,
+        status : "pending",
         notes,
         currency
       }
@@ -80,8 +79,8 @@ const GenerateInvoice = () => {
 
       toast.success('Invoice Generated Successfully')
 
-      const result = await response.json();
-      generatePdf(InvoiceDetails)
+      const data = await response.json();
+      generatePdf(data.invoice);
 
     } catch (error) {
       console.log(error);
@@ -145,7 +144,7 @@ const GenerateInvoice = () => {
             value={currency}
             onChange={(e) => setCurrency(parseInt(e.target.value))} /*set the index of the selected currency*/
           >
-            {currencies.map((currency, idx) => (
+            {currencies.map((currency) => (
               <option key={currency.symbol} value={currency.index}>
                 {currency.code} ({currency.symbol})
               </option>

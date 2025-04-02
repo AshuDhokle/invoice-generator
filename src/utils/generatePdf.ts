@@ -1,6 +1,28 @@
+import { IInvoice } from "@/models/invoiceModel";
 import { getInvoiceHTML } from "./invoiceHTML";
 import toast from "react-hot-toast";
-export const generatePdf = async (Invoice: any) => {
+export interface InvoiceDetails {
+  invoiceNumber: string;
+  date: Date;
+  dueDate: string;
+  client: string;
+  items: Item[];
+  subtotal: number;
+  taxRate: number;
+  taxAmount: number;
+  totalAmount: number;
+  status: "pending" | "paid" | "overdue";
+  notes?: string;
+  currency: string;
+}
+
+interface Item {
+  description: string;
+  quantity: number;
+  price: number;
+  total: number;
+}
+export const generatePdf = async (Invoice : IInvoice) => {
   const url = 'https://yakpdf.p.rapidapi.com/pdf';
 const options = {
   method: 'POST',

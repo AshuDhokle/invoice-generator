@@ -14,11 +14,11 @@ export async function POST(req: NextRequest) {
         
         const userId = await getDataFromToken(req);
         
-        const user = await User.findOneAndUpdate({_id:userId},{
+        await User.findOneAndUpdate({_id:userId},{
             $push:{invoices:savedInvoice}
         })
         
-        return NextResponse.json({message:'Ok'}, {status:200})
+        return NextResponse.json({message:'Ok', invoice : savedInvoice}, {status:200})
     } catch (error) {
         console.log(error);
         

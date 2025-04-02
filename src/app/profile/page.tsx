@@ -3,10 +3,11 @@ import Footer from '@/Components/Footer/Footer'
 import Navbar from '@/Components/Navbar/Navbar'
 import PreviousInvoices from '@/Components/Profile/PreviousInvoices'
 import ProfileSection from '@/Components/Profile/ProfileSection'
+import { IUser } from '@/models/userModel'
 import React, {useState, useEffect} from 'react'
 
 const Profile = () => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<IUser | null>();
   const getUser = async()=>{
     try {
         const response = await fetch('/api/getUser',{

@@ -33,14 +33,14 @@ const Signup = () => {
         body: JSON.stringify(body)
       })
 
-      const result = await response.json();
+      await response.json();
       
       if(response.ok){
         router.push('/login');
       }
-    } catch (error : any) {
+    } catch (error) {
       console.log(error);
-      setMessage(error.message)
+      setMessage('Signup Failed')
     } finally {
       setLoading(false);
     }

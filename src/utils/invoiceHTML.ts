@@ -2,7 +2,7 @@ import { IInvoice } from "@/models/invoiceModel"
 import { currencies } from "./currency"
 
 export const getInvoiceHTML = (InvoiceData : IInvoice) =>{
-  const {invoiceNumber, date, dueDate, client, items, subtotal, taxAmount, taxRate, totalAmount, notes, status, currency} = InvoiceData
+  const { client, items, subtotal, taxAmount, taxRate, totalAmount, notes, status, currency} = InvoiceData
   console.log(currency);
   
   console.log(currencies.find((_,code)=>code === currency));

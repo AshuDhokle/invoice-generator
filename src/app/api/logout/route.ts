@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connect } from "@/dbConfig/dbConfig";
 connect();
-export async function POST(req: NextRequest) {
+export async function POST() {
     try {
         const response = NextResponse.json({message:'Logged out successfully'}, {status:200})
         await response.cookies.set('token','',{httpOnly:true,expires: new Date(0)})

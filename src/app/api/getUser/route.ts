@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import User from "@/models/userModel";
+import User, { IUser } from "@/models/userModel";
 import { connect } from "@/dbConfig/dbConfig";
 import jwt from "jsonwebtoken";
 connect();
@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
     try {
         const token = req.cookies.get('token')?.value || '';
         
-        const decodedToken :any = jwt.verify(token, process.env.JWT_SECRET!);
+        const decodedToken: { id: string } = jwt.verify(token, process.env.JWT_SECRET!) as { id: string };
 
         const userId = decodedToken.id;
 

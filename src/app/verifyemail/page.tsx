@@ -14,13 +14,13 @@ const VerifyEmail = () => {
                 body: JSON.stringify({token:token})
             })   
 
-            const data = await response.json();
+            await response.json();
             if(response.ok){
                 setIsVerified(true);
             }
-        } catch (error:any) {
+        } catch (error : unknown) {
             console.log(error);
-            setError(error.message)
+            setError(true)
         }
     }
 

@@ -1,4 +1,18 @@
 import mongoose from 'mongoose'
+
+export interface IUser{
+    username: string,
+    email: string,
+    password: string, 
+    isVerified:Boolean,
+    isAdmin: Boolean,
+    verifyEmailToken?: string,
+    verifyEmailDeadline?: Date,
+    forgotPasswordToken?: string,
+    forgotPasswordDeadline?: Date,
+    invoices : [{type: mongoose.Schema.Types.ObjectId, ref:'Invoice'}]
+}
+
 const userSchema = new mongoose.Schema({
     username : {
         type:String,

@@ -38,9 +38,9 @@ export async function POST(request:NextRequest) {
             success:true,
         },{status:200})
 
-    } catch (error:any) {
+    } catch (error:unknown) {
         return NextResponse.json({
-            error:error.message,
+            error,
         },{status:500})
     }
 }
